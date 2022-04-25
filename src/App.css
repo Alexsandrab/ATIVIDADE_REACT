@@ -1,6 +1,51 @@
 .App {
   text-align: center;
 }
+*{
+  animation: fadein 1.5s 1;
+  animation-fill-mode: forwards;
+}
 
+.personList{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
 
+p{
+  font-size: 20px;
+}
 
+.links{
+  text-decoration: none;
+  font-size: 22pt;
+  color: blue
+}
+
+button{
+  animation: fadein 1.5s 1;
+  animation-fill-mode: forwards;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+button:hover{
+  cursor: pointer;
+  color: #ffffff;
+  border: 1px solid #42d3ff;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
