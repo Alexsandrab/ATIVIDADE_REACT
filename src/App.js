@@ -2,12 +2,7 @@ import "./App.css";
 import React from "react";
 import useFetchPeople from "../src/hooks/use-fetch-people";
 import { useState } from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Link,
-} from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Details from "./components/person-details";
 function App() {
   const { isLoading, error, data, isFetching } = useFetchPeople();
@@ -25,7 +20,24 @@ function App() {
     setOldNumeroElements((oldNumeroElements) => oldNumeroElements - 5);
   };
 
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: 'column',
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "25%",
+        }}
+      >
+        <div> Loading...</div>
+        <div class="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -37,17 +49,20 @@ function App() {
         </Route>
 
         <Route path="/" exact>
-          <div className="personList">
-              
+          <div className="personListContainer">
+            <div className="personList">
               <div>
                 {data?.results
                   ?.slice(oldNumeroElements, numeroElements)
                   .map((person) => (
-                    <div>
-                      <Link to={person.name} className="links">{person.name}</Link>
-                      <p>{person.birth_year}</p>
-                      <p>{person.gender}</p>
-                    </div>
+                    <Link to={person.name} className="links">
+                      <div className="personCard">
+                        Person: <span>{person.name}</span>
+                        <p>
+                          Ano de nasc.: <span>{person.birth_year}</span>{" "}
+                        </p>
+                      </div>
+                    </Link>
                   ))}
               </div>
 
@@ -67,6 +82,7 @@ function App() {
                   Próximo
                 </button>
               </div>
+            </div>
           </div>
         </Route>
       </Switch>

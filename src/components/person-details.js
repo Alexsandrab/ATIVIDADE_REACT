@@ -7,21 +7,22 @@ function Details() {
   const pessoa = data?.results.filter((pessoa) => pessoa.name === id);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
+      <h1> Detalhes </h1>
       {pessoa.map((p) => {
         return (
-          <div>
-            <p> Name: {p.name}</p>
-            <p> Mass:{p.mass}</p>
-            <p> Height: {p.height}</p>
-            <p>Gender: {p.gender}</p>
-            <p> Hair Color: {p.hair_color}</p>
+          <div className="personDetails">
+            <p> Name: <span>{p.name}</span> </p>
+            <p> Mass: <span>{p.mass}</span></p>
+            <p> Height: <span>{p.height}</span> </p>
+            <p> Gender: <span>{p.gender}</span></p>
+            <p> Hair Color: <span>{p.hair_color}</span> </p>
 
             <p>Films:</p>
             {p.films.map((f) => {
               return (
                 <div>
-                  <p>{f}</p>
+                  <span>{f}</span>
                 </div>
               );
             })}
