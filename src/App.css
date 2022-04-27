@@ -19,13 +19,14 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  box-shadow: 3px 3px rgb(238, 238, 238), 0.1em 0 0.4em rgb(93, 93, 93);
+  /* box-shadow: 3px 3px rgb(238, 238, 238), 0.1em 0 0.4em rgb(93, 93, 93); */
   width: 80%;
 }
 .personCard{
   box-shadow: 0 0 1em rgb(176, 176, 176);  margin-bottom: 10px;
   padding: 16px;
   width: 400px;
+  margin-left: 40px
 }
 
 .personDetails{
@@ -34,11 +35,11 @@
   width: 400px;
 }
 p{
-  font-size: 20px;
+  font-size: 24px;
   color: blue
 }
 span{
-  font-size: 22pt;
+  font-size: 18pt;
   color: black;
   color: black;
 }
