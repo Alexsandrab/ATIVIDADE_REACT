@@ -5,6 +5,7 @@ import { useState } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Details from "./components/person-details";
 import { Button, makeStyles, Paper, Typography } from "@material-ui/core";
+import Spinner from "./components/spinner";
 
 const useStyles = makeStyles({
   buttons: {
@@ -40,32 +41,16 @@ function App() {
     setOldNumeroElements((oldNumeroElements) => oldNumeroElements - 5);
   };
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "25%",
-        }}
-      >
-        <div> Loading...</div>
-        <div class="lds-ripple">
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    );
+  if (isLoading) return <Spinner />
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return <div>"An error has occurred: " + {error.message}</div>;
 
   const PessoaCard = () => {
     return (
       <div className="personListContainer">
         <Paper className="personList" style={{ width: "700px" }}>
           <div>
+
             {/* Card de cada pessoa */}
             <div>
               {data?.results
