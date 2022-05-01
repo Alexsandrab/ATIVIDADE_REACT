@@ -2,9 +2,12 @@ import { useParams } from "react-router-dom";
 import useFetchPeople from "../hooks/use-fetch-people";
 
 function Details() {
+
   const { id } = useParams();
-  const { isLoading, error, data, isFetching } = useFetchPeople();
-  const pessoa = data?.results.filter((pessoa) => pessoa.name === id);
+  const {  data } = useFetchPeople();
+  const pessoa = data?.results.filter((p) => p.name === id);
+
+  console.log('pessoa: ', pessoa);
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
@@ -32,5 +35,4 @@ function Details() {
     </div>
   );
 }
-
 export default Details;

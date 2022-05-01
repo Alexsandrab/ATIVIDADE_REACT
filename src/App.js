@@ -4,7 +4,7 @@ import useFetchPeople from "../src/hooks/use-fetch-people";
 import { useState } from "react";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Details from "./components/person-details";
-import { Button, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
 import Spinner from "./components/spinner";
 
 const useStyles = makeStyles({
@@ -27,7 +27,8 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
 
-  const { isLoading, error, data, isFetching } = useFetchPeople();
+  const { isLoading, error, data } = useFetchPeople();
+
   const [numeroElements, setNumeroElements] = useState(5);
   const [oldNumeroElements, setOldNumeroElements] = useState(0);
 
@@ -41,16 +42,15 @@ function App() {
     setOldNumeroElements((oldNumeroElements) => oldNumeroElements - 5);
   };
 
-  if (isLoading) return <Spinner />
-
+  if (isLoading) return <Spinner />;
   if (error) return <div>"An error has occurred: " + {error.message}</div>;
 
+  // componente CARD
   const PessoaCard = () => {
     return (
-      <div className="personListContainer">
+      <div className="personListContainer">     
         <Paper className="personList" style={{ width: "700px" }}>
           <div>
-
             {/* Card de cada pessoa */}
             <div>
               {data?.results
@@ -70,27 +70,16 @@ function App() {
             {/* Botoes */}
             <div>
               <Button
-                className={
-                  oldNumeroElements === 0
-                    ? classes.buttonsInactive
-                    : classes.buttons
-                }
+                className={oldNumeroElements === 0? classes.buttonsInactive : classes.buttons}
                 onClick={() => previousButton()}
                 disabled={oldNumeroElements === 0 ? true : false}
               >
                 <Typography className={classes.textButton}>Anterior</Typography>
               </Button>
 
-              <Button
-                className={
-                  data?.results.length && oldNumeroElements !== 0
-                    ? classes.buttonsInactive
-                    : classes.buttons
-                }
+              <Button className={data?.results.length && oldNumeroElements !== 0? classes.buttonsInactive : classes.buttons}
                 onClick={() => forwardButton()}
-                disabled={
-                  numeroElements === data?.results.length ? true : false
-                }
+                disabled={ numeroElements === data?.results.length ? true : false }
               >
                 <Typography className={classes.textButton}>Próximo</Typography>
               </Button>
@@ -101,15 +90,16 @@ function App() {
     );
   };
 
+  // nosso retorno
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/:id">
-          <Details />
-        </Route>
-
         <Route path="/" exact>
           <PessoaCard />
+        </Route>
+
+        <Route path="/:id" exact>
+          <Details />
         </Route>
       </Switch>
     </BrowserRouter>
